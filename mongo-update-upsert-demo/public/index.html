@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="utf-8">
+  <title>MongoDB: Update vs Upsert — LBD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap (CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    pre code { white-space: pre-wrap; }
+    .hero { background: linear-gradient(135deg,#0d6efd22,#19875422); border-radius: 1rem; }
+    .toast-container { z-index: 2000; }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="#">Mongo Update vs Upsert</a>
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="nav" class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link active" href="#learn">Learn</a></li>
+        <li class="nav-item"><a class="nav-link" href="#run">Run Demo</a></li>
+        <li class="nav-item"><a class="nav-link" href="#docker">Docker</a></li>
+        <!-- NEW LINK -->
+        <li class="nav-item"><a class="nav-link" href="VisualFlowExplanation.html">Visual Flow</a></li>
+      </ul>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="themeSwitch">
+        <label class="form-check-label" for="themeSwitch">Dark mode</label>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main class="container my-4">
+  <!-- Jumbotron -->
+  <section class="p-4 p-md-5 mb-4 hero">
+    <div class="row align-items-center gy-3">
+      <div class="col-md-8">
+        <h1 class="display-6 fw-semibold">Update vs Upsert — See it, Run it, Learn it.</h1>
+        <p class="lead mb-3">Update changes existing docs only. Upsert updates or inserts when missing. Use <code>$setOnInsert</code> for insert-only fields.</p>
+        <a href="#run" class="btn btn-primary btn-lg">Run Demo</a>
+        <a href="#learn" class="btn btn-outline-secondary btn-lg ms-2">Read the Basics</a>
+      </div>
+      <div class="col-md-4">
+        <!-- Carousel -->
+        <div id="concepts" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner rounded-4">
+            <div class="carousel-item active p-4 bg-light-subtle">
+              <h5>Update</h5>
+              <p>Modifies only matching docs. No match → no insert.</p>
+            </div>
+            <div class="carousel-item p-4 bg-light-subtle">
+              <h5>Upsert</h5>
+              <p>No match? Inserts a new doc from filter + update.</p>
+            </div>
+            <div class="carousel-item p-4 bg-light-subtle">
+              <h5>$setOnInsert</h5>
+              <p>Insert-only fields (e.g., createdAt) won’t change later.</p>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#concepts" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#concepts" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tabs -->
+  <section id="learn" class="mb-4">
+    <ul class="nav nav-tabs" id="learnTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-update" type="button">Update</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-upsert" type="button">Upsert</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-cheats" type="button">Cheat Sheet</button>
+      </li>
+    </ul>
+    <div class="tab-content border border-top-0 p-3 rounded-bottom">
+      <div class="tab-pane fade show active" id="tab-update">
+        <p><strong>Update</strong> modifies existing docs only.</p>
+        <pre><code>db.contacts.updateOne(
+  { email: "aarti@shade.org.in" },
+  { $set: { city: "Chennai (Adyar)" } }
+)</code></pre>
+      </div>
+      <div class="tab-pane fade" id="tab-upsert">
+        <p><strong>Upsert</strong> updates or inserts when missing. Use <code>$setOnInsert</code> for insert-only defaults.</p>
+        <pre><code>db.contacts.updateOne(
+  { email: "missing@example.com" },
+  {
+    $set: { city: "Mumbai" },
+    $setOnInsert: { createdAt: new Date(), tags: ["Prospect"] }
+  },
+  { upsert: true }
+)</code></pre>
+      </div>
+      <div class="tab-pane fade" id="tab-cheats">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead><tr><th>Operation</th><th>Creates if missing?</th><th>Use case</th></tr></thead>
+            <tbody>
+              <tr><td>updateOne(filter, update)</td><td>No</td><td>Modify known doc</td></tr>
+              <tr><td>updateOne(..., {upsert:true})</td><td>Yes</td><td>Idempotent sync</td></tr>
+              <tr><td>replaceOne(..., {upsert:true})</td><td>Yes</td><td>Full overwrite (careful)</td></tr>
+              <tr><td>$setOnInsert</td><td>—</td><td>Insert-only defaults</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cards: Run Demo + CURL -->
+  <!--
+  <section id="run" class="mb-5">
+    <div class="row g-3">
+      <div class="col-md-7">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">Run the demo</h5>
+            <p class="card-text">Calls <code>POST /run-demo</code> which executes Update (existing), Update (missing), and Upsert (missing).</p>
+            <button id="runBtn" class="btn btn-success">Run Demo</button>
+            <button id="clearOut" class="btn btn-outline-danger ms-2">Clear Output</button>
+            <hr>
+            <pre class="bg-body-secondary p-3 rounded" id="output" style="max-height: 420px; overflow:auto;"><code>// Results will appear here...</code></pre>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">cURL</h5>
+            <p class="card-text">Run from terminal:</p>
+            <pre><code>curl -X POST http://localhost:8080/run-demo | jq</code></pre>
+            <p class="card-text">Or use Postman: <code>POST /run-demo</code></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  -->
+  <section id="run" class="mb-5">
+  <div class="row g-3">
+    <!-- Run Demo -->
+    <div class="col-md-7">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Run the demo</h5>
+          <p class="card-text">Calls <code>POST /run-demo</code> which executes Update (existing), Update (missing), and Upsert (missing).</p>
+          <button id="runBtn" class="btn btn-success">Run Demo</button>
+          <button id="clearOut" class="btn btn-outline-danger ms-2">Clear Output</button>
+          <hr>
+          <pre class="bg-body-secondary p-3 rounded" id="output" style="max-height: 420px; overflow:auto;"><code>// Results will appear here...</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Utility APIs -->
+    <div class="col-md-5">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Utility APIs</h5>
+          <div class="d-flex flex-wrap gap-2">
+            <button id="btnClear" class="btn btn-outline-danger">Clear Data</button>
+            <button id="btnSeed" class="btn btn-outline-primary">Insert Sample</button>
+            <button id="btnList" class="btn btn-outline-secondary">List Contacts</button>
+          </div>
+          <hr>
+          <form id="upsertForm" class="row g-2">
+            <div class="col-12"><strong>Upsert Contact</strong></div>
+            <div class="col-12 col-sm-6">
+              <input class="form-control" name="email" placeholder="email (required)">
+            </div>
+            <div class="col-12 col-sm-6">
+              <input class="form-control" name="name" placeholder="name">
+            </div>
+            <div class="col-12 col-sm-6">
+              <input class="form-control" name="city" placeholder="city">
+            </div>
+            <div class="col-12 col-sm-6">
+              <input class="form-control" name="tags" placeholder="tags (comma separated)">
+            </div>
+            <div class="col-12">
+              <button class="btn btn-success" type="submit">Upsert</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Docker accordion -->
+  <section id="docker" class="mb-5">
+    <div class="accordion" id="acc">
+      <div class="accordion-item">
+        <h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#a1">Docker Compose</button></h2>
+        <div id="a1" class="accordion-collapse collapse show" data-bs-parent="#acc">
+          <div class="accordion-body">
+            <pre><code>docker compose up --build
+# App:   http://localhost:8080
+# Mongo: mongodb://mongo:27017</code></pre>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#a2">Troubleshooting</button></h2>
+        <div id="a2" class="accordion-collapse collapse" data-bs-parent="#acc">
+          <div class="accordion-body">
+            <ul>
+              <li>Change port in <code>.env</code> if 8080 is busy.</li>
+              <li>Ensure Mongo service is healthy before hitting <code>/run-demo</code>.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Toasts -->
+<div class="toast-container position-fixed top-0 end-0 p-3">
+  <div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Demo</strong>
+      <small>now</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+    </div>
+    <div class="toast-body" id="toastBody">Running...</div>
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Dark mode toggle
+  const themeSwitch = document.getElementById('themeSwitch');
+  const root = document.documentElement;
+  themeSwitch?.addEventListener('change', (e) => {
+    document.documentElement.setAttribute('data-bs-theme', e.target.checked ? 'dark' : 'light');
+  });
+
+  const toastEl = document.getElementById('toast');
+  const toast = new bootstrap.Toast(toastEl);
+  const toastBody = document.getElementById('toastBody');
+  const out = document.getElementById('output');
+
+  function showToast(msg) { toastBody.textContent = msg; toast.show(); }
+
+  document.getElementById('runBtn').addEventListener('click', async () => {
+    showToast('Running demo...');
+    out.textContent = '// Running...';
+    try {
+      const res = await fetch('/run-demo', { method: 'POST' });
+      const json = await res.json();
+      if (json.ok) {
+        out.textContent = JSON.stringify(json.results, null, 2);
+        showToast('Success! See results below.');
+      } else {
+        out.textContent = JSON.stringify(json, null, 2);
+        showToast('Failed — see output.');
+      }
+    } catch (e) {
+      out.textContent = e?.message || String(e);
+      showToast('Error — see output.');
+    }
+  });
+
+  document.getElementById('clearOut').addEventListener('click', () => {
+    out.textContent = '// Results cleared';
+  });
+    async function post(path, body) {
+    const res = await fetch(path, {
+      method: "POST",
+      headers: body ? { "Content-Type": "application/json" } : undefined,
+      body: body ? JSON.stringify(body) : undefined
+    });
+    return res.json();
+  }
+
+  async function get(path) {
+    const res = await fetch(path);
+    return res.json();
+  }
+
+  const out = document.getElementById('output');
+
+  document.getElementById('btnClear')?.addEventListener('click', async () => {
+    showToast('Clearing...');
+    out.textContent = '// Clearing...';
+    const json = await post('/clear-data');
+    out.textContent = JSON.stringify(json, null, 2);
+    showToast('Cleared.');
+  });
+
+  document.getElementById('btnSeed')?.addEventListener('click', async () => {
+    showToast('Seeding...');
+    out.textContent = '// Seeding...';
+    const json = await post('/insert-sample');
+    out.textContent = JSON.stringify(json, null, 2);
+    showToast('Seeded.');
+  });
+
+  document.getElementById('btnList')?.addEventListener('click', async () => {
+    showToast('Listing...');
+    out.textContent = '// Listing...';
+    const json = await get('/list-contacts?page=1&pageSize=10');
+    out.textContent = JSON.stringify(json, null, 2);
+    showToast('Done.');
+  });
+
+  document.getElementById('upsertForm')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    const tags = (fd.get('tags') || '').toString()
+      .split(',')
+      .map(s => s.trim())
+      .filter(Boolean);
+    const payload = {
+      email: fd.get('email')?.toString().trim(),
+      name:  fd.get('name')?.toString().trim() || undefined,
+      city:  fd.get('city')?.toString().trim() || undefined,
+      tags:  tags.length ? tags : undefined
+    };
+    if (!payload.email) { showToast('Email is required'); return; }
+
+    showToast('Upserting...');
+    out.textContent = '// Upserting...';
+    const json = await post('/upsert-contact', payload);
+    out.textContent = JSON.stringify(json, null, 2);
+    showToast('Upsert complete.');
+    e.target.reset();
+  });
+</script>
+</body>
+</html>

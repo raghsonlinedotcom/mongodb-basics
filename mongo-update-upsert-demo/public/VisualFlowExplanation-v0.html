@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="utf-8">
+  <title>MongoDB Update vs Upsert — Visual Flow Explanation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- highlight.js (for code blocks) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css">
+  <style>
+    .hero {
+      background: linear-gradient(135deg, rgba(13,110,253,.08), rgba(25,135,84,.08));
+      border-radius: 1rem;
+    }
+    pre code { white-space: pre-wrap; }
+    .code-toolbar {
+      position: relative;
+    }
+    .copy-btn {
+      position: absolute;
+      top: .5rem;
+      right: .5rem;
+      z-index: 2;
+    }
+    .sticky-tools {
+      position: sticky; top: 1rem; z-index: 1020;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-semibold" href="#"><i class="bi bi-diagram-3"></i> Visual Flow • Update vs Upsert</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="d-none d-lg-flex align-items-center gap-3">
+      <a class="btn btn-outline-secondary btn-sm" href="#overview"><i class="bi bi-compass"></i> Overview</a>
+      <a class="btn btn-outline-secondary btn-sm" href="#sequence"><i class="bi bi-node-plus"></i> Sequence</a>
+      <a class="btn btn-outline-secondary btn-sm" href="#deployment"><i class="bi bi-hdd-network"></i> Deployment</a>
+      <a class="btn btn-outline-secondary btn-sm" href="#ascii"><i class="bi bi-braces"></i> ASCII</a>
+      <div class="form-check form-switch m-0">
+        <input class="form-check-input" type="checkbox" id="themeSwitch">
+        <label class="form-check-label" for="themeSwitch">Dark</label>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- OFFCANVAS MENU -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNav">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Quick Navigation</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="list-group">
+      <a class="list-group-item list-group-item-action" href="#overview" data-bs-dismiss="offcanvas">
+        <i class="bi bi-compass"></i> Overview
+      </a>
+      <a class="list-group-item list-group-item-action" href="#flow" data-bs-dismiss="offcanvas">
+        <i class="bi bi-arrows"></i> Big-Picture Flow
+      </a>
+      <a class="list-group-item list-group-item-action" href="#sequence" data-bs-dismiss="offcanvas">
+        <i class="bi bi-node-plus"></i> Sequence (PlantUML)
+      </a>
+      <a class="list-group-item list-group-item-action" href="#deployment" data-bs-dismiss="offcanvas">
+        <i class="bi bi-hdd-network"></i> Deployment (PlantUML)
+      </a>
+      <a class="list-group-item list-group-item-action" href="#ascii" data-bs-dismiss="offcanvas">
+        <i class="bi bi-braces"></i> ASCII Architecture & Data Lifecycle
+      </a>
+      <a class="list-group-item list-group-item-action" href="#accordion" data-bs-dismiss="offcanvas">
+        <i class="bi bi-list-nested"></i> Deep Dive (Accordion)
+      </a>
+      <a class="list-group-item list-group-item-action" href="#tips" data-bs-dismiss="offcanvas">
+        <i class="bi bi-lightbulb"></i> Tips & Checks
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO / JUMBOTRON -->
+<header class="container my-4">
+  <div class="p-4 p-md-5 hero">
+    <div class="row align-items-center gy-3">
+      <div class="col-lg-8">
+        <h1 class="display-6 fw-semibold mb-2">MongoDB <span class="text-primary">Update</span> vs <span class="text-success">Upsert</span> — Visual Flow</h1>
+        <p class="lead mb-3">From click → Express → MongoDB → back to UI. Explore the sequence, deployment view, ASCII maps, and copy-ready PlantUML.</p>
+        <div class="d-flex gap-2">
+          <a href="#flow" class="btn btn-primary btn-lg"><i class="bi bi-arrows"></i> See the Flow</a>
+          <a href="#sequence" class="btn btn-outline-secondary btn-lg"><i class="bi bi-node-plus"></i> Sequence Diagram</a>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <!-- Carousel with concepts -->
+        <div id="concepts" class="carousel slide">
+          <div class="carousel-inner rounded-4">
+            <div class="carousel-item active p-4 bg-light-subtle">
+              <h5 class="mb-1">Update</h5>
+              <p class="mb-0">Modifies only matching docs. No match ⇒ no insert.</p>
+            </div>
+            <div class="carousel-item p-4 bg-light-subtle">
+              <h5 class="mb-1">Upsert</h5>
+              <p class="mb-0">If no match, inserts a new doc (filter + update).</p>
+            </div>
+            <div class="carousel-item p-4 bg-light-subtle">
+              <h5 class="mb-1">$setOnInsert</h5>
+              <p class="mb-0">Insert-only defaults (e.g., createdAt, createdBy).</p>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#concepts" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#concepts" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- OVERVIEW CARDS -->
+<section class="container" id="overview">
+  <div class="row g-3">
+    <div class="col-md-4">
+      <div class="card h-100 border-primary-subtle">
+        <div class="card-body">
+          <h5 class="card-title"><i class="bi bi-rocket"></i> What Happens</h5>
+          <p class="card-text">Docker spins up Mongo + App. UI is served by Express. Clicking <em>Run Demo</em> posts to <code>/run-demo</code>, which executes update/no-upsert/upsert, then returns JSON.</p>
+          <span class="badge text-bg-primary">Express</span>
+          <span class="badge text-bg-success">Mongo Driver</span>
+          <span class="badge text-bg-secondary">UI Fetch</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card h-100 border-success-subtle">
+        <div class="card-body">
+          <h5 class="card-title"><i class="bi bi-check2-circle"></i> Why It’s Reliable</h5>
+          <p class="card-text">Unique index on <code>email</code> prevents duplicates. Seeding uses upsert for idempotency. Each run yields stable, predictable results.</p>
+          <span class="badge text-bg-success">Idempotent</span>
+          <span class="badge text-bg-warning">Unique Index</span>
+          <span class="badge text-bg-info">Deterministic</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card h-100 border-warning-subtle">
+        <div class="card-body">
+          <h5 class="card-title"><i class="bi bi-exclamation-triangle"></i> Watch Outs</h5>
+          <p class="card-text">No upsert ⇒ no insert. <code>replaceOne</code> with upsert overwrites entire docs. Without a unique index, concurrent upserts can duplicate data.</p>
+          <span class="badge text-bg-danger">Replace Carefully</span>
+          <span class="badge text-bg-danger">Concurrency</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="my-4 container">
+
+<!-- TABS: Flow / Sequence / Deployment / ASCII -->
+<section class="container">
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item" role="presentation"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-flow" type="button">Big-Picture Flow</button></li>
+    <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-seq" type="button">Sequence (PlantUML)</button></li>
+    <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-deploy" type="button">Deployment (PlantUML)</button></li>
+    <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-ascii" type="button">ASCII Maps</button></li>
+  </ul>
+
+  <div class="tab-content border border-top-0 p-3 rounded-bottom">
+    <!-- FLOW (plain words) -->
+    <div class="tab-pane fade show active" id="tab-flow">
+      <ol class="mb-3">
+        <li><strong>docker compose up</strong> → network + volumes → Mongo (healthcheck) → App (Express + static UI).</li>
+        <li>Open <code>http://localhost:8080</code> → Express serves <code>index.html</code>.</li>
+        <li>Click <em>Run Demo</em> → fetch <code>POST /run-demo</code>.</li>
+        <li>Server calls <code>runUpdateUpsertDemo()</code>:
+          <ul>
+            <li>Connect, ensure unique index on <code>email</code>.</li>
+            <li>Seed Aarti (upsert).</li>
+            <li>A) Update existing → matched=1 modified=1</li>
+            <li>B) Update missing (no upsert) → matched=0 modified=0</li>
+            <li>C) Upsert missing → inserted, upsertedId ≠ null</li>
+            <li>Query final docs (projection, sort), return JSON report.</li>
+          </ul>
+        </li>
+        <li>Express responds → UI shows Toast + prints JSON.</li>
+      </ol>
+    </div>
+
+    <!-- SEQUENCE (PlantUML) -->
+    <div class="tab-pane fade" id="tab-seq">
+      <div class="alert alert-info d-flex align-items-center" role="alert">
+        <i class="bi bi-info-circle me-2"></i>
+        Copy the PlantUML into your favorite renderer (PlantUML/Kroki). Click the copy icon in the top-right of the block.
+      </div>
+
+      <div id="sequence" class="code-toolbar position-relative">
+        <button class="btn btn-sm btn-outline-secondary copy-btn" data-copy="seq-code"><i class="bi bi-clipboard"></i> Copy</button>
+        <pre><code id="seq-code" class="language-plantuml">@startuml
+skinparam ResponseMessageBelowArrow true
+
+actor User as U
+participant "Browser (index.html)" as B
+participant "Express (server.js)" as S
+participant "Demo (demo.js)" as D
+database "MongoDB (contacts)" as M
+
+U -> B : Click "Run Demo"
+B -> S : POST /run-demo
+S -> D : runUpdateUpsertDemo()
+
+group Connect & prepare
+  D -> M : connect(mongoUrl)\nget db/collection
+  D -> M : createIndex({email:1}, {unique:true})
+end
+
+group Seed (idempotent)
+  D -> M : updateOne({email:'aarti@...'},\n{$setOnInsert:{email,name,city}}, {upsert:true})
+end
+
+group A) Update existing
+  D -> M : updateOne({email:'aarti@...'}, {$set:{city:'Chennai (Adyar)'}})
+  M --> D : {matched:1, modified:1}
+end
+
+group B) Update missing (no upsert)
+  D -> M : updateOne({email:'missing@...'}, {$set:{city:'Mumbai'}})
+  M --> D : {matched:0, modified:0}
+end
+
+group C) Upsert missing (upsert:true)
+  D -> M : updateOne({email:'missing@...'},\n{$set:{city:'Mumbai'}, $setOnInsert:{createdAt,tags}}, {upsert:true})
+  M --> D : {matched:0, modified:0, upsertedId:...}
+end
+
+D -> M : find({}, projection:{_id:0})\nsort({email:1})
+M --> D : finalDocs[]
+
+D --> S : report JSON
+S --> B : { ok:true, results: {...} }
+B --> U : Render JSON & Toast
+@enduml</code></pre>
+      </div>
+    </div>
+
+    <!-- DEPLOYMENT (PlantUML) -->
+    <div class="tab-pane fade" id="tab-deploy">
+      <div class="alert alert-secondary" role="alert">
+        A deployment view of containers, ports, and connections.
+      </div>
+      <div id="deployment" class="code-toolbar position-relative">
+        <button class="btn btn-sm btn-outline-secondary copy-btn" data-copy="deploy-code"><i class="bi bi-clipboard"></i> Copy</button>
+        <pre><code id="deploy-code" class="language-plantuml">@startuml
+skinparam componentStyle rectangle
+node "Docker Host" {
+  node "Compose Network" {
+    [Browser: http://localhost:8080] as Browser
+    node "app container" {
+      [Express/Node\n(port 8080)]
+      [Static UI\n(index.html)]
+      [Route: /run-demo]
+    }
+    node "mongo container" {
+      database "MongoDB\n(port 27017)"
+      [Healthcheck: mongosh ping]
+    }
+    Browser -down-> [Express/Node\n(port 8080)] : HTTP
+    [Express/Node\n(port 8080)] -right-> "MongoDB\n(port 27017)" : MongoDB Driver
+  }
+}
+@enduml</code></pre>
+      </div>
+    </div>
+
+    <!-- ASCII MAPS -->
+    <div class="tab-pane fade" id="tab-ascii">
+      <h6 class="mb-2">Architecture (ASCII)</h6>
+      <div id="flow" class="code-toolbar position-relative mb-4">
+        <button class="btn btn-sm btn-outline-secondary copy-btn" data-copy="ascii-arch"><i class="bi bi-clipboard"></i> Copy</button>
+        <pre><code id="ascii-arch" class="language-text">+--------------------------------------- Docker Host (your Mac) ---------------------------------------+
+|                                                                                                      |
+|   docker network (compose)                                                                            |
+|                                                                                                      |
+|   +-----------------------+                     http://localhost:8080                     +--------+ |
+|   |  app (Node/Express)   | <-----------------------------------------------------------> |  You   | |
+|   |   - serves index.html |                                                              | Browser| |
+|   |   - POST /run-demo    | -- calls runUpdateUpsertDemo() -->                          +--------+ |
+|   +-----------+-----------+                                 \                                   ^   |
+|               |                                              \ JSON response                    |   |
+|               | MongoDB Driver                                \                                 |   |
+|               v                                                \                                |   |
+|   +-----------------------+                                     \                               |   |
+|   |     mongo (MongoDB)   | <------------------------------------+------------------------------+   |
+|   |   - demo_db.contacts  |         queries (createIndex, updateOne, find, etc.)                   |
+|   +-----------------------+                                                                           |
+|                                                                                                      |
++------------------------------------------------------------------------------------------------------+</code></pre>
+      </div>
+
+      <h6 class="mb-2">Data Lifecycle (ASCII)</h6>
+      <div id="ascii" class="code-toolbar position-relative">
+        <button class="btn btn-sm btn-outline-secondary copy-btn" data-copy="ascii-data"><i class="bi bi-clipboard"></i> Copy</button>
+        <pre><code id="ascii-data" class="language-text">Before:
+  contacts = []
+
+Seed (upsert on Aarti):
+  contacts = [
+    { email:"aarti@shade.org.in", name:"Aarti", city:"Chennai" }
+  ]
+
+A) Update existing:
+  aarti.city -> "Chennai (Adyar)"
+
+B) Update missing (no upsert):
+  no change
+
+C) Upsert missing:
+  insert { email:"missing@example.com", city:"Mumbai", createdAt:..., tags:["Prospect"] }
+
+After:
+  contacts = [
+    { email:"aarti@shade.org.in", name:"Aarti", city:"Chennai (Adyar)" },
+    { email:"missing@example.com", city:"Mumbai", createdAt:..., tags:["Prospect"] }
+  ]</code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="my-4 container">
+
+<!-- ACCORDION: DEEP DIVE -->
+<section class="container" id="accordion">
+  <div class="row">
+    <div class="col-lg-9">
+      <div class="accordion" id="deepDive">
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#a1">Docker Compose → What exactly happens?</button></h2>
+          <div id="a1" class="accordion-collapse collapse show" data-bs-parent="#deepDive">
+            <div class="accordion-body">
+              <ul>
+                <li>Creates a project network + named volume (<code>mongo_data</code>).</li>
+                <li>Starts <strong>mongo:7</strong> with healthcheck (<code>mongosh ping</code>).</li>
+                <li>When healthy, starts <strong>app</strong> (Node/Express). Exposes <code>8080</code> on host.</li>
+                <li>Inside network, app reaches Mongo via <code>mongodb://mongo:27017</code> (service DNS).</li>
+              </ul>
+              <pre><code>docker compose up --build
+docker compose logs -f app
+docker compose logs -f mongo</code></pre>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#a2">Front-end click → Fetch → Toast</button></h2>
+          <div id="a2" class="accordion-collapse collapse" data-bs-parent="#deepDive">
+            <div class="accordion-body">
+              <p>The button posts to <code>/run-demo</code> (same origin), so no CORS pain. A Toast gives immediate feedback; JSON renders in a <code>&lt;pre&gt;</code>.</p>
+              <pre><code>const res = await fetch('/run-demo', { method: 'POST' });
+const json = await res.json(); // { ok, results }</code></pre>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#a3">Server → Demo logic (Why those steps?)</button></h2>
+          <div id="a3" class="accordion-collapse collapse" data-bs-parent="#deepDive">
+            <div class="accordion-body">
+              <ol>
+                <li>Connect client, get db/collection (small pool).</li>
+                <li><strong>createIndex({email:1}, {unique:true})</strong> for correctness & concurrency.</li>
+                <li>Seed “Aarti” via <em>upsert</em> to be idempotent.</li>
+                <li>A) Update existing (should modify 1).</li>
+                <li>B) Update missing with no upsert (should do nothing).</li>
+                <li>C) Upsert missing (should insert and return upsertedId).</li>
+                <li>Query final docs (projection hides <code>_id</code>, sorted for stability).</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STICKY TOOLS -->
+    <div class="col-lg-3">
+      <div class="sticky-tools">
+        <div class="card border-info mb-3">
+          <div class="card-body">
+            <h6 class="card-title"><i class="bi bi-gear"></i> Handy Tools</h6>
+            <button id="btnToast" class="btn btn-sm btn-info text-white mb-2 w-100"><i class="bi bi-megaphone"></i> Show Toast</button>
+            <button id="btnTop" class="btn btn-sm btn-outline-secondary w-100"><i class="bi bi-arrow-up"></i> Back to Top</button>
+          </div>
+        </div>
+        <div class="card border-secondary">
+          <div class="card-body">
+            <h6 class="card-title"><i class="bi bi-journal-code"></i> Related</h6>
+            <ul class="small m-0 ps-3">
+              <li>Use <code>$setOnInsert</code> for insert-only fields</li>
+              <li>Prefer <code>updateOne</code> over <code>replaceOne</code> unless full overwrite intended</li>
+              <li>Always log <code>matchedCount</code>, <code>modifiedCount</code>, <code>upsertedId</code></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="my-4 container">
+
+<!-- TIPS & CHECKS -->
+<section class="container" id="tips">
+  <div class="row g-3">
+    <div class="col-md-6">
+      <div class="list-group">
+        <div class="list-group-item list-group-item-action">
+          <div class="d-flex w-100 justify-content-between">
+            <h6 class="mb-1"><i class="bi bi-shield-check"></i> Reliability</h6>
+            <span class="badge text-bg-success">Idempotent</span>
+          </div>
+          <p class="mb-1">Unique index + upsert seeding ensures safe reruns.</p>
+        </div>
+        <div class="list-group-item list-group-item-action">
+          <div class="d-flex w-100 justify-content-between">
+            <h6 class="mb-1"><i class="bi bi-bug"></i> Debug tips</h6>
+            <span class="badge text-bg-warning">Logs</span>
+          </div>
+          <pre class="mb-0"><code>curl -X POST http://localhost:8080/run-demo | jq
+docker compose logs -f app
+docker compose exec mongo mongosh</code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="alert alert-warning" role="alert">
+        <i class="bi bi-exclamation-triangle"></i> <strong>Heads-up:</strong> <code>replaceOne</code> with upsert will overwrite the entire document; use only when that’s the intent.
+      </div>
+      <div class="alert alert-secondary" role="alert">
+        <i class="bi bi-info-circle"></i> For counters/stats, combine <code>$inc</code> with upsert (and add <code>$setOnInsert</code> defaults).
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOAST -->
+<div class="toast-container position-fixed top-0 end-0 p-3">
+  <div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Visual Flow</strong>
+      <small>now</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+    </div>
+    <div class="toast-body" id="toastBody">Hello from the Visual Flow page!</div>
+  </div>
+</div>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/common.min.js"></script>
+<script>
+  hljs.highlightAll();
+
+  // Dark mode toggle
+  const themeSwitch = document.getElementById('themeSwitch');
+  themeSwitch?.addEventListener('change', (e) => {
+    document.documentElement.setAttribute('data-bs-theme', e.target.checked ? 'dark' : 'light');
+  });
+
+  // Copy buttons
+  function copyFrom(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const text = el.textContent;
+    navigator.clipboard.writeText(text).then(() => showToast('Copied to clipboard!'));
+  }
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => copyFrom(btn.dataset.copy));
+  });
+
+  // Toast helpers
+  const toastEl = document.getElementById('toast');
+  const toastObj = new bootstrap.Toast(toastEl);
+  function showToast(msg) {
+    document.getElementById('toastBody').textContent = msg;
+    toastObj.show();
+  }
+  document.getElementById('btnToast')?.addEventListener('click', () => showToast('This page is just a visual guide — copy any PlantUML or ASCII block!'));
+
+  // Back to top
+  document.getElementById('btnTop')?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+</script>
+</body>
+</html>

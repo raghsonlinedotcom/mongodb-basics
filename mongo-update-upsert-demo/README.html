@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<section id="mongodb-update-vs-upsert-learning-by-doing" class="level2">
+<h2>MongoDB Update vs Upsert — Learning by Doing</h2>
+<p><strong>Goal:</strong> Understand the difference between <strong>update</strong> and <strong>upsert</strong> in MongoDB with a runnable demo: - Press <strong>Run Demo</strong> in the web UI (Bootstrap). - A Node.js endpoint executes: 1) <code>updateOne</code> on an existing doc, 2) <code>updateOne</code> on a missing doc (no upsert) — does nothing, 3) <code>updateOne</code> with <code>{ upsert: true }</code> — inserts new doc.</p>
+<hr />
+<section id="tldr" class="level3">
+<h3>TL;DR</h3>
+<ul>
+<li><strong>update</strong>: modifies only matching documents; <strong>does not create</strong> new ones if none match.</li>
+<li><strong>upsert</strong>: <strong>update or insert</strong> — if no match, MongoDB inserts a new doc using your filter + update doc.</li>
+<li>Use <code>$setOnInsert</code> for <strong>insert-only</strong> fields (e.g., <code>createdAt</code>).</li>
+</ul>
+<hr />
+</section>
+<section id="project-structure" class="level3">
+<h3>Project Structure</h3>
+<pre><code>mongo-update-upsert-demo/
+├─ README.md
+├─ CHANGELOG.md
+├─ .env.example
+├─ package.json
+├─ docker-compose.yml
+├─ docker/
+│  └─ Dockerfile
+├─ public/
+│  └─ index.html
+└─ src/
+├─ server.js
+├─ demo.js
+└─ logger.js</code></pre>
+<hr />
+</section>
+<section id="prerequisites" class="level3">
+<h3>Prerequisites</h3>
+<ul>
+<li>Node.js 18+ (or use Docker)</li>
+<li>Docker Desktop (if running via Compose)</li>
+</ul>
+<hr />
+</section>
+<section id="environment-variables" class="level3">
+<h3>1) Environment variables</h3>
+<p>Copy <code>.env.example</code> → <code>.env</code> and adjust if needed:</p>
+<pre class="env"><code>PORT=8080
+MONGO_URL=mongodb://mongo:27017
+DB_NAME=demo_db
+COLLECTION=contacts</code></pre>
+<p>• When running without Docker, set MONGO_URL=mongodb://localhost:27017.</p>
+<ol start="2" type="1">
+<li>Install &amp; Run (Local)</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> start</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># open http://localhost:8080</span></span></code></pre></div>
+<p>Start MongoDB locally if not using Docker:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-d</span> <span class="at">--name</span> local-mongo <span class="at">-p</span> 27017:27017 mongo:7</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Then set MONGO_URL=mongodb://localhost:27017 in .env</span></span></code></pre></div>
+<ol start="3" type="1">
+<li>Run with Docker Compose (Recommended)</li>
+</ol>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose up <span class="at">--build</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># App:    http://localhost:8080</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Mongo:  mongodb://mongo:27017</span></span></code></pre></div>
+<ol start="4" type="1">
+<li>What the demo does</li>
+</ol>
+<p>Collection: contacts (unique by email)</p>
+<p>Step A — Update existing (plain update) • Filter: { email: “aarti@shade.org.in” } (inserted if not present) • Update: { $set: { city: “Chennai (Adyar)” } } • Expected: matched=1 modified=1 upsertedId=null</p>
+<p>Step B — Update missing (no upsert) • Filter: { email: “missing@example.com” } • Update: { $set: { city: “Mumbai” } } • Expected: matched=0 modified=0 (no insert)</p>
+<p>Step C — Upsert missing ({ upsert: true }) • Filter: { email: “missing@example.com” } • Update:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">{</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">$set</span><span class="ex">:</span> { city: <span class="st">&quot;Mumbai&quot;</span> },</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">$setOnInsert</span><span class="ex">:</span> { createdAt: new Date<span class="er">(</span><span class="kw">)</span><span class="ex">,</span> tags: [<span class="st">&quot;Prospect&quot;</span>] }</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code></pre></div>
+<pre><code>•   Expected: matched=0 modified=0 upsertedId=&lt;ObjectId&gt; (insert happens)</code></pre>
+<p>⸻</p>
+<ol start="5" type="1">
+<li>Sample console output</li>
+</ol>
+<pre><code>[demo] Ensuring indexes...
+[demo] A) UPDATE existing -&gt; matched=1 modified=1 upsertedId=null
+[demo] B) UPDATE missing (no upsert) -&gt; matched=0 modified=0
+[demo] C) UPSERT missing -&gt; matched=0 modified=0 upsertedId=66f...
+[demo] Final docs:
+[
+  {
+    &quot;email&quot;: &quot;aarti@shade.org.in&quot;,
+    &quot;name&quot;: &quot;Aarti&quot;,
+    &quot;city&quot;: &quot;Chennai (Adyar)&quot;
+  },
+  {
+    &quot;email&quot;: &quot;missing@example.com&quot;,
+    &quot;city&quot;: &quot;Mumbai&quot;,
+    &quot;createdAt&quot;: &quot;2025-08-30T13:00:01.234Z&quot;,
+    &quot;tags&quot;: [&quot;Prospect&quot;]
+  }
+]</code></pre>
+<ol start="6" type="1">
+<li>API • POST /run-demo → runs the 3 steps and returns JSON report.</li>
+</ol>
+<p>Example:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-X</span> POST http://localhost:8080/run-demo <span class="kw">|</span> <span class="ex">jq</span></span></code></pre></div>
+<p>Response (abridged):</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;ok&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;results&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;updateExisting&quot;</span><span class="fu">:</span> <span class="fu">{</span><span class="dt">&quot;matched&quot;</span><span class="fu">:</span><span class="dv">1</span><span class="fu">,</span><span class="dt">&quot;modified&quot;</span><span class="fu">:</span><span class="dv">1</span><span class="fu">,</span><span class="dt">&quot;upsertedId&quot;</span><span class="fu">:</span><span class="kw">null</span><span class="fu">},</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;updateMissingNoUpsert&quot;</span><span class="fu">:</span> <span class="fu">{</span><span class="dt">&quot;matched&quot;</span><span class="fu">:</span><span class="dv">0</span><span class="fu">,</span><span class="dt">&quot;modified&quot;</span><span class="fu">:</span><span class="dv">0</span><span class="fu">,</span><span class="dt">&quot;upsertedId&quot;</span><span class="fu">:</span><span class="kw">null</span><span class="fu">},</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;upsertMissing&quot;</span><span class="fu">:</span> <span class="fu">{</span><span class="dt">&quot;matched&quot;</span><span class="fu">:</span><span class="dv">0</span><span class="fu">,</span><span class="dt">&quot;modified&quot;</span><span class="fu">:</span><span class="dv">0</span><span class="fu">,</span><span class="dt">&quot;upsertedId&quot;</span><span class="fu">:</span><span class="st">&quot;66f...&quot;</span><span class="fu">},</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;finalDocs&quot;</span><span class="fu">:</span> <span class="ot">[</span> <span class="er">...</span> <span class="ot">]</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<ol start="7" type="1">
+<li>Why $setOnInsert? • Fields like createdAt, createdBy, or default tags should only be set once (on insert). • $setOnInsert ensures they won’t be overwritten in subsequent updates.</li>
+</ol>
+<p>⸻</p>
+<ol start="8" type="1">
+<li>Pro Tips &amp; Pitfalls • ✅ Create a unique index on your natural key to prevent duplicates:</li>
+</ol>
+<div class="sourceCode" id="cb11"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">db.contacts.createIndex</span><span class="er">(</span><span class="kw">{</span> <span class="ex">email:</span> 1 }, { unique: true }<span class="er">)</span></span></code></pre></div>
+<pre><code>•   ✅ For counters, combine $inc with upsert:</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>db<span class="op">.</span><span class="at">dailyStats</span><span class="op">.</span><span class="fu">updateOne</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  { <span class="dt">day</span><span class="op">:</span> <span class="st">&quot;2025-08-30&quot;</span> }<span class="op">,</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  { <span class="dt">$inc</span><span class="op">:</span> { <span class="dt">donationsCount</span><span class="op">:</span> <span class="dv">1</span> }<span class="op">,</span> <span class="dt">$setOnInsert</span><span class="op">:</span> { <span class="dt">createdAt</span><span class="op">:</span> <span class="kw">new</span> <span class="bu">Date</span>() } }<span class="op">,</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  { <span class="dt">upsert</span><span class="op">:</span> <span class="kw">true</span> }</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>•   ⚠️ replaceOne(..., { upsert: true }) overwrites entire doc. Use only if you truly mean full replace.
+•   ⚠️ Without a unique index, concurrent upserts can produce duplicates.</code></pre>
+<p>⸻</p>
+<ol start="9" type="1">
+<li>Troubleshooting • ECONNREFUSED to Mongo: Check MONGO_URL, ensure Mongo is up. • EADDRINUSE 8080: Change PORT or stop the other app using it. • duplicate key error: You inserted the same email manually; remove duplicates or change test data.</li>
+</ol>
+<p>⸻</p>
+<ol start="10" type="1">
+<li>License</li>
+</ol>
+<p>MIT</p>
+<hr />
+</section>
+</section>
+<section id="changelog.md-optional" class="level2">
+<h2>2) <code>CHANGELOG.md</code> (optional)</h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Changelog</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1.0.0 — 2025-08-30</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Initial release: Node.js demo of MongoDB update vs upsert</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Bootstrap UI with Jumbotron, Carousel, Tabs, Cards, and Toasts</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Docker Compose for app + Mongo</span></code></pre></div>
+<ol start="3" type="1">
+<li>.env.example</li>
+</ol>
+<div class="sourceCode" id="cb16"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="va">PORT</span><span class="op">=</span>8080</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="va">MONGO_URL</span><span class="op">=</span>mongodb://mongo:27017</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="va">DB_NAME</span><span class="op">=</span>demo_db</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="va">COLLECTION</span><span class="op">=</span>contacts</span></code></pre></div>
+<p>(When running locally without Compose, set MONGO_URL=mongodb://localhost:27017.)</p>
+<p>⸻</p>
+<ol start="4" type="1">
+<li>package.json</li>
+</ol>
+<div class="sourceCode" id="cb17"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;mongo-update-upsert-demo&quot;</span><span class="fu">,</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;1.0.0&quot;</span><span class="fu">,</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Practical demo of MongoDB update vs upsert with a Bootstrap UI and Docker&quot;</span><span class="fu">,</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;main&quot;</span><span class="fu">:</span> <span class="st">&quot;src/server.js&quot;</span><span class="fu">,</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;scripts&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;start&quot;</span><span class="fu">:</span> <span class="st">&quot;node src/server.js&quot;</span><span class="fu">,</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;dev&quot;</span><span class="fu">:</span> <span class="st">&quot;NODE_ENV=development nodemon src/server.js&quot;</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;dependencies&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;dotenv&quot;</span><span class="fu">:</span> <span class="st">&quot;^16.4.5&quot;</span><span class="fu">,</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;express&quot;</span><span class="fu">:</span> <span class="st">&quot;^4.19.2&quot;</span><span class="fu">,</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;mongodb&quot;</span><span class="fu">:</span> <span class="st">&quot;^6.8.0&quot;</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;devDependencies&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;nodemon&quot;</span><span class="fu">:</span> <span class="st">&quot;^3.1.4&quot;</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;license&quot;</span><span class="fu">:</span> <span class="st">&quot;MIT&quot;</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<ol start="5" type="1">
+<li>src/logger.js</li>
+</ol>
+<div class="sourceCode" id="cb18"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">const</span> log <span class="op">=</span> (<span class="op">...</span>args) <span class="kw">=&gt;</span> <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="op">...</span>args)<span class="op">;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">const</span> info <span class="op">=</span> (<span class="op">...</span>args) <span class="kw">=&gt;</span> <span class="bu">console</span><span class="op">.</span><span class="fu">info</span>(<span class="op">...</span>args)<span class="op">;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">const</span> warn <span class="op">=</span> (<span class="op">...</span>args) <span class="kw">=&gt;</span> <span class="bu">console</span><span class="op">.</span><span class="fu">warn</span>(<span class="op">...</span>args)<span class="op">;</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">const</span> error <span class="op">=</span> (<span class="op">...</span>args) <span class="kw">=&gt;</span> <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="op">...</span>args)<span class="op">;</span></span></code></pre></div>
+<ol start="6" type="1">
+<li>src/demo.js — the heart of the demo</li>
+</ol>
+<div class="sourceCode" id="cb19"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { MongoClient } <span class="im">from</span> <span class="st">&quot;mongodb&quot;</span><span class="op">;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { info } <span class="im">from</span> <span class="st">&quot;./logger.js&quot;</span><span class="op">;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">async</span> <span class="kw">function</span> <span class="fu">runUpdateUpsertDemo</span>({ mongoUrl<span class="op">,</span> dbName<span class="op">,</span> collectionName }) {</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> client <span class="op">=</span> <span class="kw">new</span> <span class="fu">MongoClient</span>(mongoUrl<span class="op">,</span> { <span class="dt">maxPoolSize</span><span class="op">:</span> <span class="dv">5</span> })<span class="op">;</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">await</span> client<span class="op">.</span><span class="fu">connect</span>()<span class="op">;</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> db <span class="op">=</span> client<span class="op">.</span><span class="fu">db</span>(dbName)<span class="op">;</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> col <span class="op">=</span> db<span class="op">.</span><span class="fu">collection</span>(collectionName)<span class="op">;</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> report <span class="op">=</span> {</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">updateExisting</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">updateMissingNoUpsert</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">upsertMissing</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">finalDocs</span><span class="op">:</span> []</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  }<span class="op">;</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">try</span> {</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">info</span>(<span class="st">&quot;[demo] Ensuring indexes...&quot;</span>)<span class="op">;</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> col<span class="op">.</span><span class="fu">createIndex</span>({ <span class="dt">email</span><span class="op">:</span> <span class="dv">1</span> }<span class="op">,</span> { <span class="dt">unique</span><span class="op">:</span> <span class="kw">true</span> })<span class="op">;</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Seed &quot;Aarti&quot; if not present</span></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> col<span class="op">.</span><span class="fu">updateOne</span>(</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>      { <span class="dt">email</span><span class="op">:</span> <span class="st">&quot;aarti@shade.org.in&quot;</span> }<span class="op">,</span></span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>      { <span class="dt">$setOnInsert</span><span class="op">:</span> { <span class="dt">email</span><span class="op">:</span> <span class="st">&quot;aarti@shade.org.in&quot;</span><span class="op">,</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&quot;Aarti&quot;</span><span class="op">,</span> <span class="dt">city</span><span class="op">:</span> <span class="st">&quot;Chennai&quot;</span> } }<span class="op">,</span></span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>      { <span class="dt">upsert</span><span class="op">:</span> <span class="kw">true</span> }</span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>    <span class="co">// A) UPDATE existing</span></span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> r1 <span class="op">=</span> <span class="cf">await</span> col<span class="op">.</span><span class="fu">updateOne</span>(</span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>      { <span class="dt">email</span><span class="op">:</span> <span class="st">&quot;aarti@shade.org.in&quot;</span> }<span class="op">,</span></span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>      { <span class="dt">$set</span><span class="op">:</span> { <span class="dt">city</span><span class="op">:</span> <span class="st">&quot;Chennai (Adyar)&quot;</span> } }</span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>    report<span class="op">.</span><span class="at">updateExisting</span> <span class="op">=</span> <span class="fu">normalize</span>(r1)<span class="op">;</span></span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>    <span class="co">// B) UPDATE missing (no upsert)</span></span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> r2 <span class="op">=</span> <span class="cf">await</span> col<span class="op">.</span><span class="fu">updateOne</span>(</span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>      { <span class="dt">email</span><span class="op">:</span> <span class="st">&quot;missing@example.com&quot;</span> }<span class="op">,</span></span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>      { <span class="dt">$set</span><span class="op">:</span> { <span class="dt">city</span><span class="op">:</span> <span class="st">&quot;Mumbai&quot;</span> } }</span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>    report<span class="op">.</span><span class="at">updateMissingNoUpsert</span> <span class="op">=</span> <span class="fu">normalize</span>(r2)<span class="op">;</span></span>
+<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>    <span class="co">// C) UPSERT missing</span></span>
+<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> r3 <span class="op">=</span> <span class="cf">await</span> col<span class="op">.</span><span class="fu">updateOne</span>(</span>
+<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a>      { <span class="dt">email</span><span class="op">:</span> <span class="st">&quot;missing@example.com&quot;</span> }<span class="op">,</span></span>
+<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a>      {</span>
+<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>        <span class="dt">$set</span><span class="op">:</span> { <span class="dt">city</span><span class="op">:</span> <span class="st">&quot;Mumbai&quot;</span> }<span class="op">,</span></span>
+<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a>        <span class="dt">$setOnInsert</span><span class="op">:</span> { <span class="dt">createdAt</span><span class="op">:</span> <span class="kw">new</span> <span class="bu">Date</span>()<span class="op">,</span> <span class="dt">tags</span><span class="op">:</span> [<span class="st">&quot;Prospect&quot;</span>] }</span>
+<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a>      }<span class="op">,</span></span>
+<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a>      { <span class="dt">upsert</span><span class="op">:</span> <span class="kw">true</span> }</span>
+<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span>
+<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a>    report<span class="op">.</span><span class="at">upsertMissing</span> <span class="op">=</span> <span class="fu">normalize</span>(r3)<span class="op">;</span></span>
+<span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-53"><a href="#cb19-53" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Final docs snapshot</span></span>
+<span id="cb19-54"><a href="#cb19-54" aria-hidden="true" tabindex="-1"></a>    report<span class="op">.</span><span class="at">finalDocs</span> <span class="op">=</span> <span class="cf">await</span> col</span>
+<span id="cb19-55"><a href="#cb19-55" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">find</span>({}<span class="op">,</span> { <span class="dt">projection</span><span class="op">:</span> { <span class="dt">_id</span><span class="op">:</span> <span class="dv">0</span> } })</span>
+<span id="cb19-56"><a href="#cb19-56" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">sort</span>({ <span class="dt">email</span><span class="op">:</span> <span class="dv">1</span> })</span>
+<span id="cb19-57"><a href="#cb19-57" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">toArray</span>()<span class="op">;</span></span>
+<span id="cb19-58"><a href="#cb19-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-59"><a href="#cb19-59" aria-hidden="true" tabindex="-1"></a>    <span class="fu">info</span>(<span class="st">&quot;[demo] Done.&quot;</span>)<span class="op">;</span></span>
+<span id="cb19-60"><a href="#cb19-60" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> report<span class="op">;</span></span>
+<span id="cb19-61"><a href="#cb19-61" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">finally</span> {</span>
+<span id="cb19-62"><a href="#cb19-62" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> client<span class="op">.</span><span class="fu">close</span>()<span class="op">;</span></span>
+<span id="cb19-63"><a href="#cb19-63" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb19-64"><a href="#cb19-64" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-65"><a href="#cb19-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-66"><a href="#cb19-66" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">normalize</span>(r) {</span>
+<span id="cb19-67"><a href="#cb19-67" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> {</span>
+<span id="cb19-68"><a href="#cb19-68" aria-hidden="true" tabindex="-1"></a>    <span class="dt">matched</span><span class="op">:</span> r<span class="op">.</span><span class="at">matchedCount</span> <span class="op">??</span> <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb19-69"><a href="#cb19-69" aria-hidden="true" tabindex="-1"></a>    <span class="dt">modified</span><span class="op">:</span> r<span class="op">.</span><span class="at">modifiedCount</span> <span class="op">??</span> <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb19-70"><a href="#cb19-70" aria-hidden="true" tabindex="-1"></a>    <span class="dt">upsertedId</span><span class="op">:</span> r<span class="op">.</span><span class="at">upsertedId</span><span class="op">?.</span><span class="fu">toString</span>() <span class="op">??</span> <span class="kw">null</span></span>
+<span id="cb19-71"><a href="#cb19-71" aria-hidden="true" tabindex="-1"></a>  }<span class="op">;</span></span>
+<span id="cb19-72"><a href="#cb19-72" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<ol start="7" type="1">
+<li>src/server.js — tiny API + static file server</li>
+</ol>
+<div class="sourceCode" id="cb20"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> express <span class="im">from</span> <span class="st">&quot;express&quot;</span><span class="op">;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dotenv <span class="im">from</span> <span class="st">&quot;dotenv&quot;</span><span class="op">;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> path <span class="im">from</span> <span class="st">&quot;path&quot;</span><span class="op">;</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { fileURLToPath } <span class="im">from</span> <span class="st">&quot;url&quot;</span><span class="op">;</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { runUpdateUpsertDemo } <span class="im">from</span> <span class="st">&quot;./demo.js&quot;</span><span class="op">;</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { info<span class="op">,</span> error } <span class="im">from</span> <span class="st">&quot;./logger.js&quot;</span><span class="op">;</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>dotenv<span class="op">.</span><span class="fu">config</span>()<span class="op">;</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> <span class="bu">__filename</span> <span class="op">=</span> <span class="fu">fileURLToPath</span>(<span class="im">import</span><span class="op">.</span><span class="at">meta</span><span class="op">.</span><span class="at">url</span>)<span class="op">;</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> <span class="bu">__dirname</span> <span class="op">=</span> path<span class="op">.</span><span class="fu">dirname</span>(<span class="bu">__filename</span>)<span class="op">;</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> PORT <span class="op">=</span> <span class="bu">process</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">PORT</span> <span class="op">||</span> <span class="dv">8080</span><span class="op">;</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> MONGO_URL <span class="op">=</span> <span class="bu">process</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">MONGO_URL</span> <span class="op">||</span> <span class="st">&quot;mongodb://localhost:27017&quot;</span><span class="op">;</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> DB_NAME <span class="op">=</span> <span class="bu">process</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">DB_NAME</span> <span class="op">||</span> <span class="st">&quot;demo_db&quot;</span><span class="op">;</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> COLLECTION <span class="op">=</span> <span class="bu">process</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">COLLECTION</span> <span class="op">||</span> <span class="st">&quot;contacts&quot;</span><span class="op">;</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> app <span class="op">=</span> <span class="fu">express</span>()<span class="op">;</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>app<span class="op">.</span><span class="fu">use</span>(express<span class="op">.</span><span class="fu">json</span>())<span class="op">;</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="co">// Serve the static UI</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>app<span class="op">.</span><span class="fu">use</span>(express<span class="op">.</span><span class="fu">static</span>(path<span class="op">.</span><span class="fu">join</span>(<span class="bu">__dirname</span><span class="op">,</span> <span class="st">&quot;..&quot;</span><span class="op">,</span> <span class="st">&quot;public&quot;</span>)))<span class="op">;</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>app<span class="op">.</span><span class="fu">post</span>(<span class="st">&quot;/run-demo&quot;</span><span class="op">,</span> <span class="kw">async</span> (req<span class="op">,</span> res) <span class="kw">=&gt;</span> {</span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>  <span class="cf">try</span> {</span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> results <span class="op">=</span> <span class="cf">await</span> <span class="fu">runUpdateUpsertDemo</span>({</span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>      <span class="dt">mongoUrl</span><span class="op">:</span> MONGO_URL<span class="op">,</span></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>      <span class="dt">dbName</span><span class="op">:</span> DB_NAME<span class="op">,</span></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>      <span class="dt">collectionName</span><span class="op">:</span> COLLECTION</span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>    res<span class="op">.</span><span class="fu">json</span>({ <span class="dt">ok</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> results })<span class="op">;</span></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">catch</span> (e) {</span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">error</span>(e)<span class="op">;</span></span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>    res<span class="op">.</span><span class="fu">status</span>(<span class="dv">500</span>)<span class="op">.</span><span class="fu">json</span>({ <span class="dt">ok</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span> <span class="dt">error</span><span class="op">:</span> e<span class="op">?.</span><span class="at">message</span> <span class="op">||</span> <span class="st">&quot;Unknown error&quot;</span> })<span class="op">;</span></span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>app<span class="op">.</span><span class="fu">listen</span>(PORT<span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">info</span>(<span class="vs">`🚀 Server running on http://localhost:</span><span class="sc">${</span>PORT<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">info</span>(<span class="vs">`➡️  POST /run-demo`</span>)<span class="op">;</span></span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+<ol start="8" type="1">
+<li>public/index.html — Bootstrap UI (Jumbotron, Carousel, Tabs, Cards, Toasts, Navbar)</li>
+</ol>
+<blockquote>
+<p>Uses CDN Bootstrap (quick). Contains a Run Demo button that calls /run-demo, shows a Toast, and renders results.</p>
+</blockquote>
+<div class="sourceCode" id="cb21"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!doctype </span>html<span class="dt">&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html</span> <span class="er">lang</span><span class="ot">=</span><span class="st">&quot;en&quot;</span> <span class="er">data-bs-theme</span><span class="ot">=</span><span class="st">&quot;light&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;head&gt;</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;meta</span> <span class="er">charset</span><span class="ot">=</span><span class="st">&quot;utf-8&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;title&gt;</span>MongoDB: Update vs Upsert — LBD<span class="kw">&lt;/title&gt;</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;viewport&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;width=device-width, initial-scale=1&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Bootstrap (CDN) --&gt;</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;link</span> <span class="er">href</span><span class="ot">=</span><span class="st">&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css&quot;</span> <span class="er">rel</span><span class="ot">=</span><span class="st">&quot;stylesheet&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;style&gt;</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    pre code { <span class="kw">white-space</span>: <span class="dv">pre-wrap</span><span class="op">;</span> }</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.hero</span> { <span class="kw">background</span>: <span class="fu">linear-gradient(</span><span class="dv">135</span><span class="dt">deg</span><span class="op">,</span><span class="cn">#0d6efd22</span><span class="op">,</span><span class="cn">#19875422</span><span class="fu">)</span><span class="op">;</span> <span class="kw">border-radius</span>: <span class="dv">1</span><span class="dt">rem</span><span class="op">;</span> }</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.toast-container</span> { <span class="kw">z-index</span>: <span class="dv">2000</span><span class="op">;</span> }</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/style&gt;</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/head&gt;</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;body&gt;</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;nav</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;navbar navbar-expand-lg bg-body-tertiary shadow-sm sticky-top&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;a</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;navbar-brand fw-bold&quot;</span> <span class="er">href</span><span class="ot">=</span><span class="st">&quot;#&quot;</span><span class="kw">&gt;</span>Mongo Update vs Upsert<span class="kw">&lt;/a&gt;</span></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;button</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;navbar-toggler&quot;</span> <span class="er">data-bs-toggle</span><span class="ot">=</span><span class="st">&quot;collapse&quot;</span> <span class="er">data-bs-target</span><span class="ot">=</span><span class="st">&quot;#nav&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;span</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;navbar-toggler-icon&quot;</span><span class="kw">&gt;&lt;/span&gt;</span></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/button&gt;</span></span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;div</span> <span class="er">id</span><span class="ot">=</span><span class="st">&quot;nav&quot;</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;collapse navbar-collapse&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;ul</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;navbar-nav me-auto mb-2 mb-lg-0&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;li</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;nav-item&quot;</span><span class="kw">&gt;&lt;a</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;nav-link active&quot;</span> <span class="er">href</span><span class="ot">=</span><span class="st">&quot;#learn&quot;</span><span class="kw">&gt;</span>Learn<span class="kw">&lt;/a&gt;&lt;/li&gt;</span></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;li</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;nav-item&quot;</span><span class="kw">&gt;&lt;a</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;nav-link&quot;</span> <span class="er">href</span><span class="ot">=</span><span class="st">&quot;#run&quot;</span><span class="kw">&gt;</span>Run Demo<span class="kw">&lt;/a&gt;&lt;/li&gt;</span></span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;li</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;nav-item&quot;</span><span class="kw">&gt;&lt;a</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;nav-link&quot;</span> <span class="er">href</span><span class="ot">=</span><span class="st">&quot;#docker&quot;</span><span class="kw">&gt;</span>Docker<span class="kw">&lt;/a&gt;&lt;/li&gt;</span></span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/ul&gt;</span></span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;form-check form-switch&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;input</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;form-check-input&quot;</span> <span class="er">type</span><span class="ot">=</span><span class="st">&quot;checkbox&quot;</span> <span class="er">id</span><span class="ot">=</span><span class="st">&quot;themeSwitch&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;label</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;form-check-label&quot;</span> <span class="er">for</span><span class="ot">=</span><span class="st">&quot;themeSwitch&quot;</span><span class="kw">&gt;</span>Dark mode<span class="kw">&lt;/label&gt;</span></span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/nav&gt;</span></span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;main</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;container my-4&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Jumbotron --&gt;</span></span>
+<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;section</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;p-4 p-md-5 mb-4 hero&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;row align-items-center gy-3&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;col-md-8&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-41"><a href="#cb21-41" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;h1</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;display-6 fw-semibold&quot;</span><span class="kw">&gt;</span>Update vs Upsert — See it, Run it, Learn it.<span class="kw">&lt;/h1&gt;</span></span>
+<span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;p</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;lead mb-3&quot;</span><span class="kw">&gt;</span>Update changes existing docs only. Upsert updates or inserts when missing. Use <span class="kw">&lt;code&gt;</span>$setOnInsert<span class="kw">&lt;/code&gt;</span> for insert-only fields.<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb21-43"><a href="#cb21-43" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;a</span> <span class="er">href</span><span class="ot">=</span><span class="st">&quot;#run&quot;</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;btn btn-primary btn-lg&quot;</span><span class="kw">&gt;</span>Run Demo<span class="kw">&lt;/a&gt;</span></span>
+<span id="cb21-44"><a href="#cb21-44" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;a</span> <span class="er">href</span><span class="ot">=</span><span class="st">&quot;#learn&quot;</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;btn btn-outline-secondary btn-lg ms-2&quot;</span><span class="kw">&gt;</span>Read the Basics<span class="kw">&lt;/a&gt;</span></span>
+<span id="cb21-45"><a href="#cb21-45" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-46"><a href="#cb21-46" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;col-md-4&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-47"><a href="#cb21-47" aria-hidden="true" tabindex="-1"></a>        <span class="co">&lt;!-- Carousel --&gt;</span></span>
+<span id="cb21-48"><a href="#cb21-48" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span> <span class="er">id</span><span class="ot">=</span><span class="st">&quot;concepts&quot;</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;carousel slide&quot;</span> <span class="er">data-bs-ride</span><span class="ot">=</span><span class="st">&quot;carousel&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-49"><a href="#cb21-49" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;carousel-inner rounded-4&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-50"><a href="#cb21-50" aria-hidden="true" tabindex="-1"></a>            <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;carousel-item active p-4 bg-light-subtle&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-51"><a href="#cb21-51" aria-hidden="true" tabindex="-1"></a>              <span class="kw">&lt;h5&gt;</span>Update<span class="kw">&lt;/h5&gt;</span></span>
+<span id="cb21-52"><a href="#cb21-52" aria-hidden="true" tabindex="-1"></a>              <span class="kw">&lt;p&gt;</span>Modifies only matching docs. No match → no insert.<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb21-53"><a href="#cb21-53" aria-hidden="true" tabindex="-1"></a>            <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-54"><a href="#cb21-54" aria-hidden="true" tabindex="-1"></a>            <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;carousel-item p-4 bg-light-subtle&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-55"><a href="#cb21-55" aria-hidden="true" tabindex="-1"></a>              <span class="kw">&lt;h5&gt;</span>Upsert<span class="kw">&lt;/h5&gt;</span></span>
+<span id="cb21-56"><a href="#cb21-56" aria-hidden="true" tabindex="-1"></a>              <span class="kw">&lt;p&gt;</span>No match? Inserts a new doc from filter + update.<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb21-57"><a href="#cb21-57" aria-hidden="true" tabindex="-1"></a>            <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-58"><a href="#cb21-58" aria-hidden="true" tabindex="-1"></a>            <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;carousel-item p-4 bg-light-subtle&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-59"><a href="#cb21-59" aria-hidden="true" tabindex="-1"></a>              <span class="kw">&lt;h5&gt;</span>$setOnInsert<span class="kw">&lt;/h5&gt;</span></span>
+<span id="cb21-60"><a href="#cb21-60" aria-hidden="true" tabindex="-1"></a>              <span class="kw">&lt;p&gt;</span>Insert-only fields (e.g., createdAt) won’t change later.<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb21-61"><a href="#cb21-61" aria-hidden="true" tabindex="-1"></a>            <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-62"><a href="#cb21-62" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-63"><a href="#cb21-63" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;button</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;carousel-control-prev&quot;</span> <span class="er">type</span><span class="ot">=</span><span class="st">&quot;button&quot;</span> <span class="er">data-bs-target</span><span class="ot">=</span><span class="st">&quot;#concepts&quot;</span> <span class="er">data-bs-slide</span><span class="ot">=</span><span class="st">&quot;prev&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-64"><a href="#cb21-64" aria-hidden="true" tabindex="-1"></a>            <span class="kw">&lt;span</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;carousel-control-prev-icon&quot;</span><span class="kw">&gt;&lt;/span&gt;</span></span>
+<span id="cb21-65"><a href="#cb21-65" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;/button&gt;</span></span>
+<span id="cb21-66"><a href="#cb21-66" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;button</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;carousel-control-next&quot;</span> <span class="er">type</span><span class="ot">=</span><span class="st">&quot;button&quot;</span> <span class="er">data-bs-target</span><span class="ot">=</span><span class="st">&quot;#concepts&quot;</span> <span class="er">data-bs-slide</span><span class="ot">=</span><span class="st">&quot;next&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-67"><a href="#cb21-67" aria-hidden="true" tabindex="-1"></a>            <span class="kw">&lt;span</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;carousel-control-next-icon&quot;</span><span class="kw">&gt;&lt;/span&gt;</span></span>
+<span id="cb21-68"><a href="#cb21-68" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;/button&gt;</span></span>
+<span id="cb21-69"><a href="#cb21-69" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-70"><a href="#cb21-70" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-71"><a href="#cb21-71" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-72"><a href="#cb21-72" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/section&gt;</span></span>
+<span id="cb21-73"><a href="#cb21-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-74"><a href="#cb21-74" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Tabs --&gt;</span></span>
+<span id="cb21-75"><a href="#cb21-75" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;section</span> <span class="er">id</span><span class="ot">=</span><span class="st">&quot;learn&quot;</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;mb-4&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-76"><a href="#cb21-76" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;ul</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;nav nav-tabs&quot;</span> <span class="er">id</span><span class="ot">=</span><span class="st">&quot;learnTabs&quot;</span> <span class="er">role</span><span class="ot">=</span><span class="st">&quot;tablist&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-77"><a href="#cb21-77" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;li</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;nav-item&quot;</span> <span class="er">role</span><span class="ot">=</span><span class="st">&quot;presentation&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-78"><a href="#cb21-78" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;button</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;nav-link active&quot;</span> <span class="er">data-bs-toggle</span><span class="ot">=</span><span class="st">&quot;tab&quot;</span> <span class="er">data-bs-target</span><span class="ot">=</span><span class="st">&quot;#tab-update&quot;</span> <span class="er">type</span><span class="ot">=</span><span class="st">&quot;button&quot;</span><span class="kw">&gt;</span>Update<span class="kw">&lt;/button&gt;</span></span>
+<span id="cb21-79"><a href="#cb21-79" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/li&gt;</span></span>
+<span id="cb21-80"><a href="#cb21-80" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;li</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;nav-item&quot;</span> <span class="er">role</span><span class="ot">=</span><span class="st">&quot;presentation&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-81"><a href="#cb21-81" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;button</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;nav-link&quot;</span> <span class="er">data-bs-toggle</span><span class="ot">=</span><span class="st">&quot;tab&quot;</span> <span class="er">data-bs-target</span><span class="ot">=</span><span class="st">&quot;#tab-upsert&quot;</span> <span class="er">type</span><span class="ot">=</span><span class="st">&quot;button&quot;</span><span class="kw">&gt;</span>Upsert<span class="kw">&lt;/button&gt;</span></span>
+<span id="cb21-82"><a href="#cb21-82" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/li&gt;</span></span>
+<span id="cb21-83"><a href="#cb21-83" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;li</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;nav-item&quot;</span> <span class="er">role</span><span class="ot">=</span><span class="st">&quot;presentation&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-84"><a href="#cb21-84" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;button</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;nav-link&quot;</span> <span class="er">data-bs-toggle</span><span class="ot">=</span><span class="st">&quot;tab&quot;</span> <span class="er">data-bs-target</span><span class="ot">=</span><span class="st">&quot;#tab-cheats&quot;</span> <span class="er">type</span><span class="ot">=</span><span class="st">&quot;button&quot;</span><span class="kw">&gt;</span>Cheat Sheet<span class="kw">&lt;/button&gt;</span></span>
+<span id="cb21-85"><a href="#cb21-85" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/li&gt;</span></span>
+<span id="cb21-86"><a href="#cb21-86" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/ul&gt;</span></span>
+<span id="cb21-87"><a href="#cb21-87" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;tab-content border border-top-0 p-3 rounded-bottom&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-88"><a href="#cb21-88" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;tab-pane fade show active&quot;</span> <span class="er">id</span><span class="ot">=</span><span class="st">&quot;tab-update&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-89"><a href="#cb21-89" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;p&gt;&lt;strong&gt;</span>Update<span class="kw">&lt;/strong&gt;</span> modifies existing docs only.<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb21-90"><a href="#cb21-90" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;pre&gt;&lt;code&gt;</span>db.contacts.updateOne(</span>
+<span id="cb21-91"><a href="#cb21-91" aria-hidden="true" tabindex="-1"></a>  { email: &quot;aarti@shade.org.in&quot; },</span>
+<span id="cb21-92"><a href="#cb21-92" aria-hidden="true" tabindex="-1"></a>  { $set: { city: &quot;Chennai (Adyar)&quot; } }</span>
+<span id="cb21-93"><a href="#cb21-93" aria-hidden="true" tabindex="-1"></a>)<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></span>
+<span id="cb21-94"><a href="#cb21-94" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-95"><a href="#cb21-95" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;tab-pane fade&quot;</span> <span class="er">id</span><span class="ot">=</span><span class="st">&quot;tab-upsert&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-96"><a href="#cb21-96" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;p&gt;&lt;strong&gt;</span>Upsert<span class="kw">&lt;/strong&gt;</span> updates or inserts when missing. Use <span class="kw">&lt;code&gt;</span>$setOnInsert<span class="kw">&lt;/code&gt;</span> for insert-only defaults.<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb21-97"><a href="#cb21-97" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;pre&gt;&lt;code&gt;</span>db.contacts.updateOne(</span>
+<span id="cb21-98"><a href="#cb21-98" aria-hidden="true" tabindex="-1"></a>  { email: &quot;missing@example.com&quot; },</span>
+<span id="cb21-99"><a href="#cb21-99" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb21-100"><a href="#cb21-100" aria-hidden="true" tabindex="-1"></a>    $set: { city: &quot;Mumbai&quot; },</span>
+<span id="cb21-101"><a href="#cb21-101" aria-hidden="true" tabindex="-1"></a>    $setOnInsert: { createdAt: new Date(), tags: [&quot;Prospect&quot;] }</span>
+<span id="cb21-102"><a href="#cb21-102" aria-hidden="true" tabindex="-1"></a>  },</span>
+<span id="cb21-103"><a href="#cb21-103" aria-hidden="true" tabindex="-1"></a>  { upsert: true }</span>
+<span id="cb21-104"><a href="#cb21-104" aria-hidden="true" tabindex="-1"></a>)<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></span>
+<span id="cb21-105"><a href="#cb21-105" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-106"><a href="#cb21-106" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;tab-pane fade&quot;</span> <span class="er">id</span><span class="ot">=</span><span class="st">&quot;tab-cheats&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-107"><a href="#cb21-107" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;table-responsive&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-108"><a href="#cb21-108" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;table</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;table table-striped&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-109"><a href="#cb21-109" aria-hidden="true" tabindex="-1"></a>            <span class="kw">&lt;thead&gt;&lt;tr&gt;&lt;th&gt;</span>Operation<span class="kw">&lt;/th&gt;&lt;th&gt;</span>Creates if missing?<span class="kw">&lt;/th&gt;&lt;th&gt;</span>Use case<span class="kw">&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;</span></span>
+<span id="cb21-110"><a href="#cb21-110" aria-hidden="true" tabindex="-1"></a>            <span class="kw">&lt;tbody&gt;</span></span>
+<span id="cb21-111"><a href="#cb21-111" aria-hidden="true" tabindex="-1"></a>              <span class="kw">&lt;tr&gt;&lt;td&gt;</span>updateOne(filter, update)<span class="kw">&lt;/td&gt;&lt;td&gt;</span>No<span class="kw">&lt;/td&gt;&lt;td&gt;</span>Modify known doc<span class="kw">&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb21-112"><a href="#cb21-112" aria-hidden="true" tabindex="-1"></a>              <span class="kw">&lt;tr&gt;&lt;td&gt;</span>updateOne(..., {upsert:true})<span class="kw">&lt;/td&gt;&lt;td&gt;</span>Yes<span class="kw">&lt;/td&gt;&lt;td&gt;</span>Idempotent sync<span class="kw">&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb21-113"><a href="#cb21-113" aria-hidden="true" tabindex="-1"></a>              <span class="kw">&lt;tr&gt;&lt;td&gt;</span>replaceOne(..., {upsert:true})<span class="kw">&lt;/td&gt;&lt;td&gt;</span>Yes<span class="kw">&lt;/td&gt;&lt;td&gt;</span>Full overwrite (careful)<span class="kw">&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb21-114"><a href="#cb21-114" aria-hidden="true" tabindex="-1"></a>              <span class="kw">&lt;tr&gt;&lt;td&gt;</span>$setOnInsert<span class="kw">&lt;/td&gt;&lt;td&gt;</span>—<span class="kw">&lt;/td&gt;&lt;td&gt;</span>Insert-only defaults<span class="kw">&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb21-115"><a href="#cb21-115" aria-hidden="true" tabindex="-1"></a>            <span class="kw">&lt;/tbody&gt;</span></span>
+<span id="cb21-116"><a href="#cb21-116" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;/table&gt;</span></span>
+<span id="cb21-117"><a href="#cb21-117" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-118"><a href="#cb21-118" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-119"><a href="#cb21-119" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-120"><a href="#cb21-120" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/section&gt;</span></span>
+<span id="cb21-121"><a href="#cb21-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-122"><a href="#cb21-122" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Cards: Run Demo + CURL --&gt;</span></span>
+<span id="cb21-123"><a href="#cb21-123" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;section</span> <span class="er">id</span><span class="ot">=</span><span class="st">&quot;run&quot;</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;mb-5&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-124"><a href="#cb21-124" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;row g-3&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-125"><a href="#cb21-125" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;col-md-7&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-126"><a href="#cb21-126" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;card h-100&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-127"><a href="#cb21-127" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;card-body&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-128"><a href="#cb21-128" aria-hidden="true" tabindex="-1"></a>            <span class="kw">&lt;h5</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;card-title&quot;</span><span class="kw">&gt;</span>Run the demo<span class="kw">&lt;/h5&gt;</span></span>
+<span id="cb21-129"><a href="#cb21-129" aria-hidden="true" tabindex="-1"></a>            <span class="kw">&lt;p</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;card-text&quot;</span><span class="kw">&gt;</span>Calls <span class="kw">&lt;code&gt;</span>POST /run-demo<span class="kw">&lt;/code&gt;</span> which executes Update (existing), Update (missing), and Upsert (missing).<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb21-130"><a href="#cb21-130" aria-hidden="true" tabindex="-1"></a>            <span class="kw">&lt;button</span> <span class="er">id</span><span class="ot">=</span><span class="st">&quot;runBtn&quot;</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;btn btn-success&quot;</span><span class="kw">&gt;</span>Run Demo<span class="kw">&lt;/button&gt;</span></span>
+<span id="cb21-131"><a href="#cb21-131" aria-hidden="true" tabindex="-1"></a>            <span class="kw">&lt;button</span> <span class="er">id</span><span class="ot">=</span><span class="st">&quot;clearOut&quot;</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;btn btn-outline-danger ms-2&quot;</span><span class="kw">&gt;</span>Clear Output<span class="kw">&lt;/button&gt;</span></span>
+<span id="cb21-132"><a href="#cb21-132" aria-hidden="true" tabindex="-1"></a>            <span class="kw">&lt;hr&gt;</span></span>
+<span id="cb21-133"><a href="#cb21-133" aria-hidden="true" tabindex="-1"></a>            <span class="kw">&lt;pre</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;bg-body-secondary p-3 rounded&quot;</span> <span class="er">id</span><span class="ot">=</span><span class="st">&quot;output&quot;</span> <span class="er">style</span><span class="ot">=</span><span class="st">&quot;max-height: 420px; overflow:auto;&quot;</span><span class="kw">&gt;&lt;code&gt;</span>// Results will appear here...<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></span>
+<span id="cb21-134"><a href="#cb21-134" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-135"><a href="#cb21-135" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-136"><a href="#cb21-136" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-137"><a href="#cb21-137" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;col-md-5&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-138"><a href="#cb21-138" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;card h-100&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-139"><a href="#cb21-139" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;card-body&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-140"><a href="#cb21-140" aria-hidden="true" tabindex="-1"></a>            <span class="kw">&lt;h5</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;card-title&quot;</span><span class="kw">&gt;</span>cURL<span class="kw">&lt;/h5&gt;</span></span>
+<span id="cb21-141"><a href="#cb21-141" aria-hidden="true" tabindex="-1"></a>            <span class="kw">&lt;p</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;card-text&quot;</span><span class="kw">&gt;</span>Run from terminal:<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb21-142"><a href="#cb21-142" aria-hidden="true" tabindex="-1"></a>            <span class="kw">&lt;pre&gt;&lt;code&gt;</span>curl -X POST http://localhost:8080/run-demo | jq<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></span>
+<span id="cb21-143"><a href="#cb21-143" aria-hidden="true" tabindex="-1"></a>            <span class="kw">&lt;p</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;card-text&quot;</span><span class="kw">&gt;</span>Or use Postman: <span class="kw">&lt;code&gt;</span>POST /run-demo<span class="kw">&lt;/code&gt;&lt;/p&gt;</span></span>
+<span id="cb21-144"><a href="#cb21-144" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-145"><a href="#cb21-145" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-146"><a href="#cb21-146" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-147"><a href="#cb21-147" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-148"><a href="#cb21-148" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/section&gt;</span></span>
+<span id="cb21-149"><a href="#cb21-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-150"><a href="#cb21-150" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Docker accordion --&gt;</span></span>
+<span id="cb21-151"><a href="#cb21-151" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;section</span> <span class="er">id</span><span class="ot">=</span><span class="st">&quot;docker&quot;</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;mb-5&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-152"><a href="#cb21-152" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;accordion&quot;</span> <span class="er">id</span><span class="ot">=</span><span class="st">&quot;acc&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-153"><a href="#cb21-153" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;accordion-item&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-154"><a href="#cb21-154" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;h2</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;accordion-header&quot;</span><span class="kw">&gt;&lt;button</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;accordion-button&quot;</span> <span class="er">data-bs-toggle</span><span class="ot">=</span><span class="st">&quot;collapse&quot;</span> <span class="er">data-bs-target</span><span class="ot">=</span><span class="st">&quot;#a1&quot;</span><span class="kw">&gt;</span>Docker Compose<span class="kw">&lt;/button&gt;&lt;/h2&gt;</span></span>
+<span id="cb21-155"><a href="#cb21-155" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span> <span class="er">id</span><span class="ot">=</span><span class="st">&quot;a1&quot;</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;accordion-collapse collapse show&quot;</span> <span class="er">data-bs-parent</span><span class="ot">=</span><span class="st">&quot;#acc&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-156"><a href="#cb21-156" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;accordion-body&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-157"><a href="#cb21-157" aria-hidden="true" tabindex="-1"></a>            <span class="kw">&lt;pre&gt;&lt;code&gt;</span>docker compose up --build</span>
+<span id="cb21-158"><a href="#cb21-158" aria-hidden="true" tabindex="-1"></a># App:   http://localhost:8080</span>
+<span id="cb21-159"><a href="#cb21-159" aria-hidden="true" tabindex="-1"></a># Mongo: mongodb://mongo:27017<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></span>
+<span id="cb21-160"><a href="#cb21-160" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-161"><a href="#cb21-161" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-162"><a href="#cb21-162" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-163"><a href="#cb21-163" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;accordion-item&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-164"><a href="#cb21-164" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;h2</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;accordion-header&quot;</span><span class="kw">&gt;&lt;button</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;accordion-button collapsed&quot;</span> <span class="er">data-bs-toggle</span><span class="ot">=</span><span class="st">&quot;collapse&quot;</span> <span class="er">data-bs-target</span><span class="ot">=</span><span class="st">&quot;#a2&quot;</span><span class="kw">&gt;</span>Troubleshooting<span class="kw">&lt;/button&gt;&lt;/h2&gt;</span></span>
+<span id="cb21-165"><a href="#cb21-165" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span> <span class="er">id</span><span class="ot">=</span><span class="st">&quot;a2&quot;</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;accordion-collapse collapse&quot;</span> <span class="er">data-bs-parent</span><span class="ot">=</span><span class="st">&quot;#acc&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-166"><a href="#cb21-166" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;accordion-body&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-167"><a href="#cb21-167" aria-hidden="true" tabindex="-1"></a>            <span class="kw">&lt;ul&gt;</span></span>
+<span id="cb21-168"><a href="#cb21-168" aria-hidden="true" tabindex="-1"></a>              <span class="kw">&lt;li&gt;</span>Change port in <span class="kw">&lt;code&gt;</span>.env<span class="kw">&lt;/code&gt;</span> if 8080 is busy.<span class="kw">&lt;/li&gt;</span></span>
+<span id="cb21-169"><a href="#cb21-169" aria-hidden="true" tabindex="-1"></a>              <span class="kw">&lt;li&gt;</span>Ensure Mongo service is healthy before hitting <span class="kw">&lt;code&gt;</span>/run-demo<span class="kw">&lt;/code&gt;</span>.<span class="kw">&lt;/li&gt;</span></span>
+<span id="cb21-170"><a href="#cb21-170" aria-hidden="true" tabindex="-1"></a>            <span class="kw">&lt;/ul&gt;</span></span>
+<span id="cb21-171"><a href="#cb21-171" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-172"><a href="#cb21-172" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-173"><a href="#cb21-173" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-174"><a href="#cb21-174" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-175"><a href="#cb21-175" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/section&gt;</span></span>
+<span id="cb21-176"><a href="#cb21-176" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/main&gt;</span></span>
+<span id="cb21-177"><a href="#cb21-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-178"><a href="#cb21-178" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Toasts --&gt;</span></span>
+<span id="cb21-179"><a href="#cb21-179" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;toast-container position-fixed top-0 end-0 p-3&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-180"><a href="#cb21-180" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;div</span> <span class="er">id</span><span class="ot">=</span><span class="st">&quot;toast&quot;</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;toast&quot;</span> <span class="er">role</span><span class="ot">=</span><span class="st">&quot;alert&quot;</span> <span class="er">aria-live</span><span class="ot">=</span><span class="st">&quot;assertive&quot;</span> <span class="er">aria-atomic</span><span class="ot">=</span><span class="st">&quot;true&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-181"><a href="#cb21-181" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;toast-header&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-182"><a href="#cb21-182" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;strong</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;me-auto&quot;</span><span class="kw">&gt;</span>Demo<span class="kw">&lt;/strong&gt;</span></span>
+<span id="cb21-183"><a href="#cb21-183" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;small&gt;</span>now<span class="kw">&lt;/small&gt;</span></span>
+<span id="cb21-184"><a href="#cb21-184" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;button</span> <span class="er">type</span><span class="ot">=</span><span class="st">&quot;button&quot;</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;btn-close&quot;</span> <span class="er">data-bs-dismiss</span><span class="ot">=</span><span class="st">&quot;toast&quot;</span><span class="kw">&gt;&lt;/button&gt;</span></span>
+<span id="cb21-185"><a href="#cb21-185" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-186"><a href="#cb21-186" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;toast-body&quot;</span> <span class="er">id</span><span class="ot">=</span><span class="st">&quot;toastBody&quot;</span><span class="kw">&gt;</span>Running...<span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-187"><a href="#cb21-187" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-188"><a href="#cb21-188" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-189"><a href="#cb21-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-190"><a href="#cb21-190" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Bootstrap JS --&gt;</span></span>
+<span id="cb21-191"><a href="#cb21-191" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span> <span class="er">src</span><span class="ot">=</span><span class="st">&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span>
+<span id="cb21-192"><a href="#cb21-192" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script&gt;</span></span>
+<span id="cb21-193"><a href="#cb21-193" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Dark mode toggle</span></span>
+<span id="cb21-194"><a href="#cb21-194" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> themeSwitch <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">&#39;themeSwitch&#39;</span>)<span class="op">;</span></span>
+<span id="cb21-195"><a href="#cb21-195" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> <span class="bu">root</span> <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="at">documentElement</span><span class="op">;</span></span>
+<span id="cb21-196"><a href="#cb21-196" aria-hidden="true" tabindex="-1"></a>  themeSwitch<span class="op">?.</span><span class="fu">addEventListener</span>(<span class="st">&#39;change&#39;</span><span class="op">,</span> (e) <span class="kw">=&gt;</span> {</span>
+<span id="cb21-197"><a href="#cb21-197" aria-hidden="true" tabindex="-1"></a>    <span class="bu">document</span><span class="op">.</span><span class="at">documentElement</span><span class="op">.</span><span class="fu">setAttribute</span>(<span class="st">&#39;data-bs-theme&#39;</span><span class="op">,</span> e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">checked</span> <span class="op">?</span> <span class="st">&#39;dark&#39;</span> <span class="op">:</span> <span class="st">&#39;light&#39;</span>)<span class="op">;</span></span>
+<span id="cb21-198"><a href="#cb21-198" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb21-199"><a href="#cb21-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-200"><a href="#cb21-200" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> toastEl <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">&#39;toast&#39;</span>)<span class="op">;</span></span>
+<span id="cb21-201"><a href="#cb21-201" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> toast <span class="op">=</span> <span class="kw">new</span> bootstrap<span class="op">.</span><span class="fu">Toast</span>(toastEl)<span class="op">;</span></span>
+<span id="cb21-202"><a href="#cb21-202" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> toastBody <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">&#39;toastBody&#39;</span>)<span class="op">;</span></span>
+<span id="cb21-203"><a href="#cb21-203" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> out <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">&#39;output&#39;</span>)<span class="op">;</span></span>
+<span id="cb21-204"><a href="#cb21-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-205"><a href="#cb21-205" aria-hidden="true" tabindex="-1"></a>  <span class="kw">function</span> <span class="fu">showToast</span>(msg) { toastBody<span class="op">.</span><span class="at">textContent</span> <span class="op">=</span> msg<span class="op">;</span> toast<span class="op">.</span><span class="fu">show</span>()<span class="op">;</span> }</span>
+<span id="cb21-206"><a href="#cb21-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-207"><a href="#cb21-207" aria-hidden="true" tabindex="-1"></a>  <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">&#39;runBtn&#39;</span>)<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb21-208"><a href="#cb21-208" aria-hidden="true" tabindex="-1"></a>    <span class="fu">showToast</span>(<span class="st">&#39;Running demo...&#39;</span>)<span class="op">;</span></span>
+<span id="cb21-209"><a href="#cb21-209" aria-hidden="true" tabindex="-1"></a>    out<span class="op">.</span><span class="at">textContent</span> <span class="op">=</span> <span class="st">&#39;// Running...&#39;</span><span class="op">;</span></span>
+<span id="cb21-210"><a href="#cb21-210" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span> {</span>
+<span id="cb21-211"><a href="#cb21-211" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> res <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(<span class="st">&#39;/run-demo&#39;</span><span class="op">,</span> { <span class="dt">method</span><span class="op">:</span> <span class="st">&#39;POST&#39;</span> })<span class="op">;</span></span>
+<span id="cb21-212"><a href="#cb21-212" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> json <span class="op">=</span> <span class="cf">await</span> res<span class="op">.</span><span class="fu">json</span>()<span class="op">;</span></span>
+<span id="cb21-213"><a href="#cb21-213" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (json<span class="op">.</span><span class="at">ok</span>) {</span>
+<span id="cb21-214"><a href="#cb21-214" aria-hidden="true" tabindex="-1"></a>        out<span class="op">.</span><span class="at">textContent</span> <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(json<span class="op">.</span><span class="at">results</span><span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb21-215"><a href="#cb21-215" aria-hidden="true" tabindex="-1"></a>        <span class="fu">showToast</span>(<span class="st">&#39;Success! See results below.&#39;</span>)<span class="op">;</span></span>
+<span id="cb21-216"><a href="#cb21-216" aria-hidden="true" tabindex="-1"></a>      } <span class="cf">else</span> {</span>
+<span id="cb21-217"><a href="#cb21-217" aria-hidden="true" tabindex="-1"></a>        out<span class="op">.</span><span class="at">textContent</span> <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(json<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb21-218"><a href="#cb21-218" aria-hidden="true" tabindex="-1"></a>        <span class="fu">showToast</span>(<span class="st">&#39;Failed — see output.&#39;</span>)<span class="op">;</span></span>
+<span id="cb21-219"><a href="#cb21-219" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb21-220"><a href="#cb21-220" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">catch</span> (e) {</span>
+<span id="cb21-221"><a href="#cb21-221" aria-hidden="true" tabindex="-1"></a>      out<span class="op">.</span><span class="at">textContent</span> <span class="op">=</span> e<span class="op">?.</span><span class="at">message</span> <span class="op">||</span> <span class="bu">String</span>(e)<span class="op">;</span></span>
+<span id="cb21-222"><a href="#cb21-222" aria-hidden="true" tabindex="-1"></a>      <span class="fu">showToast</span>(<span class="st">&#39;Error — see output.&#39;</span>)<span class="op">;</span></span>
+<span id="cb21-223"><a href="#cb21-223" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb21-224"><a href="#cb21-224" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb21-225"><a href="#cb21-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-226"><a href="#cb21-226" aria-hidden="true" tabindex="-1"></a>  <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">&#39;clearOut&#39;</span>)<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb21-227"><a href="#cb21-227" aria-hidden="true" tabindex="-1"></a>    out<span class="op">.</span><span class="at">textContent</span> <span class="op">=</span> <span class="st">&#39;// Results cleared&#39;</span><span class="op">;</span></span>
+<span id="cb21-228"><a href="#cb21-228" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb21-229"><a href="#cb21-229" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/script&gt;</span></span>
+<span id="cb21-230"><a href="#cb21-230" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/body&gt;</span></span>
+<span id="cb21-231"><a href="#cb21-231" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code></pre></div>
+<ol start="9" type="1">
+<li>Docker</li>
+</ol>
+<p>docker/Dockerfile</p>
+<pre><code># ---- Build/runtime in one (simple) ----
+FROM node:20-alpine
+
+WORKDIR /app
+COPY package.json package-lock.json* ./
+RUN npm install --omit=dev || npm install --omit=dev
+
+COPY . .
+
+ENV PORT=8080
+EXPOSE 8080
+
+CMD [&quot;npm&quot;, &quot;start&quot;]</code></pre>
+<p>docker-compose.yml</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode yml"><code class="sourceCode yaml"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;3.9&quot;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">services</span><span class="kw">:</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">mongo</span><span class="kw">:</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> mongo:7</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">container_name</span><span class="kw">:</span><span class="at"> mongo-update-upsert-demo-mongo</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ports</span><span class="kw">:</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;27017:27017&quot;</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">healthcheck</span><span class="kw">:</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">test</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;CMD&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;mongosh&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;--eval&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;db.adminCommand(&#39;ping&#39;)&quot;</span><span class="kw">]</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">interval</span><span class="kw">:</span><span class="at"> 5s</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">timeout</span><span class="kw">:</span><span class="at"> 3s</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">retries</span><span class="kw">:</span><span class="at"> </span><span class="dv">20</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">volumes</span><span class="kw">:</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> mongo_data:/data/db</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">app</span><span class="kw">:</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">build</span><span class="kw">:</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">context</span><span class="kw">:</span><span class="at"> .</span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">dockerfile</span><span class="kw">:</span><span class="at"> docker/Dockerfile</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">container_name</span><span class="kw">:</span><span class="at"> mongo-update-upsert-demo-app</span></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">env_file</span><span class="kw">:</span></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> .env</span></span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">environment</span><span class="kw">:</span></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> MONGO_URL=mongodb://mongo:27017</span></span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ports</span><span class="kw">:</span></span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;8080:8080&quot;</span></span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">depends_on</span><span class="kw">:</span></span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">mongo</span><span class="kw">:</span></span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">condition</span><span class="kw">:</span><span class="at"> service_healthy</span></span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a><span class="fu">volumes</span><span class="kw">:</span></span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">mongo_data</span><span class="kw">:</span></span></code></pre></div>
+<ol start="10" type="1">
+<li>Done! How to run</li>
+</ol>
+<p>Option A — Docker Compose</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> mongo-update-upsert-demo</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> .env.example .env</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose up <span class="at">--build</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># open http://localhost:8080 and click “Run Demo”</span></span></code></pre></div>
+<p>Option B — Local</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> mongo-update-upsert-demo</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> .env.example .env</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># If you don’t have Mongo locally, run: docker run -d --name local-mongo -p 27017:27017 mongo:7</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Then set MONGO_URL=mongodb://localhost:27017 in .env</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> start</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># open http://localhost:8080</span></span></code></pre></div>
+<p>If you want, I can also add: • a mongosh script to replay the exact steps, • a Makefile (or npm scripts) for common tasks, • an optional Nginx container to serve index.html separately while Node exposes only the API.</p>
+</section>
+</body>
+</html>

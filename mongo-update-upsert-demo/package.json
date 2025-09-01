@@ -1,0 +1,19 @@
+{
+  "name": "mongo-update-upsert-demo",
+  "version": "1.0.0",
+  "description": "Practical demo of MongoDB update vs upsert with a Bootstrap UI and Docker",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "NODE_ENV=development nodemon src/server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongodb": "^6.8.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  },
+  "license": "MIT"
+}
